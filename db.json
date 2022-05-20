@@ -1,0 +1,67 @@
+{
+  "menu": [
+    {
+      "img": "img/tabs/1.jpg",
+      "altimg": "car",
+      "title": "2021 Mercedes-Benz C-Class",
+      "descr": "The 2021 Mercedes-Benz C-Class finishes in the top half of ourluxury small car rankings. It's powerful and upscale, but it hasso-so handli...",
+      "price": 100
+    },
+    {
+      "img": "img/tabs/2.jpg",
+      "altimg": "car",
+      "title": "2021 Mercedes-Benz C-Class",
+      "descr": "The 2021 Mercedes-Benz C-Class finishes in the top half of ourluxury small car rankings. It's powerful and upscale, but it hasso-so handli...",
+      "price": 200
+    },
+    {
+      "img": "img/tabs/3.jpg",
+      "altimg": "car",
+      "title": "2021 Mercedes-Benz C-Class",
+      "descr": "The 2021 Mercedes-Benz C-Class finishes in the top half of ourluxury small car rankings. It's powerful and upscale, but it hasso-so handli...",
+      "price": 300
+    }
+  ],
+  "request": [
+    {
+      "name": "Baxrom Soatmurodov",
+      "phone": "+998993423957",
+      "id": 1
+    },
+    {
+      "name": "samariddin ",
+      "phone": "903241212",
+      "id": 2
+    },
+    {
+      "name": "diyorbek",
+      "phone": "902321313",
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "id": 7
+    },
+    {
+      "id": 8
+    },
+    {
+      "name": "Baxrom Soatmurodov",
+      "phone": "+998993423957",
+      "id": 9
+    },
+    {
+      "name": "Baxrom Soatmurodov",
+      "phone": "+998993423957",
+      "id": 10
+    }
+  ]
+}

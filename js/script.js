@@ -133,6 +133,38 @@ window.addEventListener("DOMContentLoaded", () => {
   setClock(".timer", deadline);
 
   // CLASS
+
+  // const getResource = async (url) => {
+  //   const res = await fetch(url);
+  //   if (!res.ok) {
+  //     throw new Error(`could not fetch ${url}  ${res.status}`);
+  //   }
+  //   return await res.json();
+  // };
+  // getResource("http://localhost:3000/menu").then((data) => {
+  //   data.forEach(({ img, altimg, title, descr, price }) => {
+  //     new CarCard(
+  //       img,
+  //       altimg,
+  //       title,
+  //       descr,
+  //       price,
+  //       ".menu .container"
+  //     ).render();
+  //   });
+  // });
+  axios.get("http://localhost:3000/menu").then((data) => {
+    data.data.forEach(({ img, altimg, title, descr, price }) => {
+      new CarCard(
+        img,
+        altimg,
+        title,
+        descr,
+        price,
+        ".menu .container"
+      ).render();
+    });
+  });
   class CarCard {
     constructor(src, alt, title, descr, price, parentSelector, ...classess) {
       this.src = src;
@@ -152,12 +184,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     render() {
       const element = document.createElement("div");
-      // if(this.classess.length === 0) {
-      //   this.classess = 'menu__item'
-      //   element.classList.add(this.classess)
-      // }else{
-      //   this.classess.forEach(className => element.classList.add(className))
-      // }
+      if (this.classess.length === 0) {
+        this.classess = "menu__item";
+        element.classList.add(this.classess);
+      } else {
+        this.classess.forEach((className) => element.classList.add(className));
+      }
       element.innerHTML = `
         <div class="menu__item">
           <img src=${this.src} alt=${this.alt} />
@@ -173,40 +205,39 @@ window.addEventListener("DOMContentLoaded", () => {
       this.parent.append(element);
     }
   }
-  new CarCard(
-    "img/tabs/1.jpg",
-    "car",
-    "2021 Mercedes-Benz C-Class",
-    `The 2021 Mercedes-Benz C-Class finishes in the top half of our
-    luxury small car rankings. It's powerful and upscale, but it has
-    so-so handli...`,
-    100,
-    ".menu .container"
-    // 'red',
-    // 'black'
-  ).render();
-  new CarCard(
-    "img/tabs/2.jpg",
-    "car",
-    "2021 Mercedes-Benz CLA-Class",
-    `The 2021 Mercedes-Benz C-Class finishes in the top half of our
-    luxury small car rankings. It's powerful and upscale, but it has
-    so-so handli...`,
-    100,
-    ".menu .container"
-  ).render();
-  new CarCard(
-    "img/tabs/3.jpg",
-    "car",
-    "2021 Mercedes-Benz SCLA",
-    `The 2021 Mercedes-Benz C-Class finishes in the top half of our
-    luxury small car rankings. It's powerful and upscale, but it has
-    so-so handli...`,
-    100,
-    ".menu .container"
-  ).render();
-
-  // SLIDER FIRST WAY (EASY)
+  // new CarCard(
+  //   "img/tabs/1.jpg",
+  //   "car",
+  //   "2021 Mercedes-Benz C-Class",
+  //   `The 2021 Mercedes-Benz C-Class finishes in the top half of our
+  //   luxury small car rankings. It's powerful and upscale, but it has
+  //   so-so handli...`,
+  //   100,
+  //   ".menu .container"
+  //   // 'red',
+  //   // 'black'
+  // ).render();
+  // new CarCard(
+  //   "img/tabs/2.jpg",
+  //   "car",
+  //   "2021 Mercedes-Benz CLA-Class",
+  //   `The 2021 Mercedes-Benz C-Class finishes in the top half of our
+  //   luxury small car rankings. It's powerful and upscale, but it has
+  //   so-so handli...`,
+  //   100,
+  //   ".menu .container"
+  // ).render();
+  // new CarCard(
+  //   "img/tabs/3.jpg",
+  //   "car",
+  //   "2021 Mercedes-Benz SCLA",
+  //   `The 2021 Mercedes-Benz C-Class finishes in the top half of our
+  //   luxury small car rankings. It's powerful and upscale, but it has
+  //   so-so handli...`,
+  //   100,
+  //   ".menu .container"
+  // ).render();
+  // // SLIDER FIRST WAY (EASY)
   // const slides = document.querySelectorAll('.offer__slide'),
   //   prev = document.querySelector('.offer__slider-prev'),
   //   next = document.querySelector('.offer__slider-next'),
@@ -313,13 +344,15 @@ window.addEventListener("DOMContentLoaded", () => {
     indicator.append(dot);
     dots.push(dot);
   }
-
+  function deleteNotDigits(str) {
+    return +str.replace(/\D/g, "");
+  }
   next.addEventListener("click", () => {
-    if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+    if (offset == deleteNotDigits(width) * (slides.length - 1)) {
       // 650
       offset = 0;
     } else {
-      offset += +width.slice(0, width.length - 2);
+      offset += deleteNotDigits(width);
     }
     slidesField.style.transform = `translateX(-${offset}px)`;
 
@@ -341,9 +374,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   prev.addEventListener("click", () => {
     if (offset == 0) {
-      offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+      offset = deleteNotDigits(width) * (slides.length - 1);
     } else {
-      offset -= +width.slice(0, width.length - 2);
+      offset -= deleteNotDigits(width);
     }
     slidesField.style.transform = `translateX(-${offset}px)`;
 
@@ -368,7 +401,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const slideTo = e.target.getAttribute("data-slide-to");
 
       slideIndex = slideTo;
-      offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+      offset = deleteNotDigits(width) * (slideTo - 1);
       slidesField.style.transform = `translateX(-${offset}px)`;
 
       if (slides.length < 10) {
@@ -400,14 +433,24 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const forms = document.querySelectorAll("form");
   forms.forEach((item) => {
-    postData(item);
+    bindPostData(item);
   });
   const Massage = {
     loading: "img/form/spinner.svg",
     success: "success",
     failure: "error",
   };
-  function postData(form) {
+  const postData = async (url, data) => {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: data,
+    });
+    return await res.json();
+  };
+  function bindPostData(form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const formMassage = document.createElement("img");
@@ -424,18 +467,20 @@ window.addEventListener("DOMContentLoaded", () => {
       // formData.forEach(function (value, key) {
       //   object[key] = value;
       // });
+      const json = JSON.stringify(Object.fromEntries(formData.entries()));
       // const json = JSON.stringify(object);
 
-      fetch("server1.php", {
-        method: "POST",
-        // headers: {
-        //   "Content-type": "application/json",
-        // },
-        body: formData,
-      })
-        .then((data) => {
-          data.text();
-        })
+      // fetch("server1.php", {
+      //   method: "POST",
+      // headers: {
+      //   "Content-type": "application/json",
+      // },
+      //   body: formData,
+      // })
+      // .then((data) => {
+      //   return data.text();
+      // })
+      postData("http://localhost:3000/request", json)
         .then((data) => {
           console.log(data);
           showThinksModal(Massage.success);
