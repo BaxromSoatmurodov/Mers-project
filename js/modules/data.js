@@ -48,4 +48,4 @@ function data() {
   }
   setClock(".timer", deadline);
 }
-module.exports = data;
+export default data;

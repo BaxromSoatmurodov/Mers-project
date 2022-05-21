@@ -105,4 +105,4 @@ function cards() {
   //   ".menu .container"
   // ).render();
 }
-module.exports = cards;
+export default cards;

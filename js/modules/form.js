@@ -1,4 +1,4 @@
-function form() {
+function form(modalSelector) {
   // Form
   const forms = document.querySelectorAll("form");
   forms.forEach((item) => {
@@ -79,12 +79,12 @@ function form() {
     const prevdialogModal = document.querySelector(".modal__dialog");
 
     prevdialogModal.classList.add("hide");
-    openModal();
+    openModal(modalSelector);
 
     const ThinksModal = document.createElement("div");
     ThinksModal.classList.add("modal__dialog");
     ThinksModal.innerHTML = `
-    <div class="modal__content">
+    <div class="modal__content">  
       <div class="modal__close" data-close>x</div>
       <div class="modal__title">${Massage}</div>
     </div>`;
@@ -93,8 +93,9 @@ function form() {
       ThinksModal.remove();
       prevdialogModal.classList.add("show");
       prevdialogModal.classList.remove("hide");
-      closeModal();
+      closeModal(modalSelector);
     }, 4000);
   }
 }
-module.exports = form;
+export default form;
+import { openModal, closeModal } from "./modals";
